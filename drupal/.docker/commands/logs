@@ -2,5 +2,5 @@
 
 set -e
 
-docker compose -f ${DOCKER_FOLDER}/docker-compose.yml logs -f $@
+docker logs -f ${PROJECT_NAME}_$@
 
