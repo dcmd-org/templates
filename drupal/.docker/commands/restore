@@ -1,5 +1,7 @@
 #!/usr/bin/env /bin/bash
 
+# @description: Restore database and files from backup
+
 set -e
 
 echo -e "Importing database..."

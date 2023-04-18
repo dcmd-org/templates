@@ -1,5 +1,7 @@
 #!/usr/bin/env /bin/bash
 
+# @description: Run npm in the node container
+
 set -e
 
 DEFAULT_TASK="install"

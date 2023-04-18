@@ -1,5 +1,7 @@
 #!/usr/bin/env /bin/bash
 
+# @description: Import a SQL dump into the mysql database
+
 set -e
 
 docker exec -i ${PROJECT_NAME}_db mysql -u root -proot default < "$@"

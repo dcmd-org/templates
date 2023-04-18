@@ -1,5 +1,7 @@
 #!/usr/bin/env /bin/bash
 
+# @description: Run composer in the php container
+
 set -e
 
 TASK="$@"

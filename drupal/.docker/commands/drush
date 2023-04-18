@@ -1,5 +1,7 @@
 #!/usr/bin/env /bin/bash
 
+# @description: Run drush in php container
+
 set -e
 
 TASK="$@"

@@ -1,5 +1,7 @@
 #!/usr/bin/env /bin/bash
 
+# @description: Run the agnostic-bundler in the node container
+
 set -e
 
 DEFAULT_TASK="dev"
