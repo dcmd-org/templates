@@ -1,0 +1,8 @@
+#!/usr/bin/env /bin/bash
+
+# @description: Display logs of the given container
+
+set -e
+
+docker logs -f ${PROJECT_NAME}_$@
+

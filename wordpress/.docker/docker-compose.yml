@@ -1,6 +1,6 @@
 version: '3.9'
 
-name: my_drupal_project
+name: my_wordpress_project
 
 services:
 
@@ -111,19 +111,6 @@ services:
     expose:
       - 8025
       - 1025
-    networks:
-      - mainnet
-
-  solr:
-    hostname: solr
-    container_name: ${PROJECT_NAME}_solr
-    build: services/solr
-    volumes:
-      - ${PROJECT_ROOT}/.docker/data/solr:/var/solr
-    dns:
-      - ${SUBNET_BASE}.20
-    expose:
-      - 8983
     networks:
       - mainnet
 
