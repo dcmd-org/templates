@@ -5,7 +5,7 @@
 set -e
 
 docker exec -i ${PROJECT_NAME}_db /bin/bash -c "mysqldump -u root -proot default --max_allowed_packet=512M" > "${PROJECT_ROOT}/.docker/backup/db.sql"
-rsync -avhP "${PROJECT_ROOT}/web/sites/default/files/" "${PROJECT_ROOT}/.docker/backup/files/"
+rsync -avhP "${PROJECT_ROOT}/app/uploads/" "${PROJECT_ROOT}/.docker/backup/uploads/"
 
 cd "${PROJECT_ROOT}/.docker/backup"
 

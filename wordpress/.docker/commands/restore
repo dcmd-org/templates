@@ -8,7 +8,7 @@ echo -e "Importing database..."
 docker exec -i ${PROJECT_NAME}_db mysql -u root -proot default < ${PROJECT_ROOT}/.docker/backup/db.sql
 
 echo -e "Importing files..."
-rsync -avhP "${PROJECT_ROOT}/.docker/backup/files/" "${PROJECT_ROOT}/web/sites/default/files/"
+rsync -avhP "${PROJECT_ROOT}/.docker/backup/uploads/" "${PROJECT_ROOT}/app/uploads/"
 
 echo -e "✅ Database and files restored"
 

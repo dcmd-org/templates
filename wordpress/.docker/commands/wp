@@ -1,6 +1,6 @@
 #!/usr/bin/env /bin/bash
 
-# @description: Run drush in php container
+# @description: Run WP CLI in php container
 
 set -e
 
