@@ -39,8 +39,8 @@ services:
         ipv4_address: ${SUBNET_BASE}.20
 
   apache:
-    hostname: web
-    container_name: ${PROJECT_NAME}_web
+    hostname: apache
+    container_name: ${PROJECT_NAME}_apache
     build:
       dockerfile: services/httpd/Dockerfile
       args:
