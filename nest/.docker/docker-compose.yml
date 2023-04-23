@@ -1,0 +1,104 @@
+version: '3.9'
+
+name: my_nest_project
+
+services:
+
+  node:
+    hostname: node
+    container_name: ${PROJECT_NAME}_node
+    build: services/node
+    working_dir: /var/www
+    command: tail -f /dev/null
+    dns:
+      - ${SUBNET_BASE}.20
+      - 8.8.8.8
+    volumes:
+      - type: bind
+        source: ${PROJECT_ROOT}
+        target: /var/www
+    ports:
+      - 3000:3000
+    networks:
+      - mainnet
+
+  dns:
+    hostname: dns
+    container_name: ${PROJECT_NAME}_dns
+    build:
+      dockerfile: services/dns/Dockerfile
+      args:
+        - SUBNET_BASE=${SUBNET_BASE}
+    ports:
+      - 53/udp
+    cap_add:
+      - NET_ADMIN
+    networks:
+      mainnet:
+        ipv4_address: ${SUBNET_BASE}.20
+
+  apache:
+    hostname: apache
+    container_name: ${PROJECT_NAME}_apache
+    build:
+      dockerfile: services/httpd/Dockerfile
+      args:
+        - PROJECT_ROOT=${PROJECT_ROOT}
+    dns:
+      - ${SUBNET_BASE}.20
+      - 8.8.8.8
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ${PROJECT_ROOT}:/usr/local/apache2/htdocs
+      - ${PROJECT_ROOT}/.docker/etc/apache/httpd.conf:/usr/local/apache2/conf/httpd.conf
+      - ${PROJECT_ROOT}/.docker/etc/apache/httpd-vhosts.conf:/usr/local/apache2/conf/extra/httpd-vhosts.conf
+    networks:
+      mainnet:
+        ipv4_address: ${SUBNET_BASE}.10
+
+  db:
+    hostname: db
+    container_name: ${PROJECT_NAME}_db
+    image: mariadb:10.6.12
+    dns:
+      - ${SUBNET_BASE}.20
+      - 8.8.8.8
+    expose:
+      - 3306
+    ports:
+      - 52000:3306
+    volumes:
+      - db_data:/var/lib/mysql  # Database data volume
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=user
+      - MYSQL_DATABASE=default
+    networks:
+      - mainnet
+
+  mail:
+    hostname: mail
+    container_name: ${PROJECT_NAME}_mail
+    image: jcalonso/mailhog:v1.0.1
+    dns:
+      - ${SUBNET_BASE}.20
+    expose:
+      - 8025
+      - 1025
+    networks:
+      - mainnet
+
+volumes:
+  db_data:
+    name: ${PROJECT_NAME}_db_data
+
+networks:
+  mainnet:
+    driver: bridge
+    ipam:
+     config:
+        - subnet: ${SUBNET_BASE}.0/24
+          gateway: ${SUBNET_BASE}.1
