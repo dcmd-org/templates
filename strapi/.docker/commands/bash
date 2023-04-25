@@ -1,0 +1,8 @@
+#!/usr/bin/env /bin/bash
+
+# @description: Run bash in a given container
+
+set -e
+
+docker exec -it ${PROJECT_NAME}_${@} /bin/bash
+

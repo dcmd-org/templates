@@ -1,0 +1,13 @@
+#!/usr/bin/env /bin/bash
+
+# @description: Restore database and files from backup
+
+set -e
+
+echo -e "Importing database and files..."
+docker exec -i ${PROJECT_NAME}_db mysql -u root -proot default < ${PROJECT_ROOT}/.docker/backup/db.sql
+rsync -avhP "${PROJECT_ROOT}/.docker/backup/uploads/" "${PROJECT_ROOT}/public/uploads/"
+
+echo -e "✅ Database and files restored"
+
+
