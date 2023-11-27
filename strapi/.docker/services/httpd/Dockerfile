@@ -1,4 +1,4 @@
-FROM httpd:2.4.55-bullseye
+FROM httpd:2.4.57-bullseye
 
 ARG PROJECT_ROOT
 

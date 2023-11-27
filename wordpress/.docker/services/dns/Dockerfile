@@ -1,4 +1,4 @@
-FROM debian:11.6-slim
+FROM debian:11.8-slim
 
 ARG SUBNET_BASE
 

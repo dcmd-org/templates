@@ -1,4 +1,4 @@
-FROM php:8.1.16-fpm
+FROM php:8.2.12-fpm
 
 RUN apt update -y &&\
     apt install git -y

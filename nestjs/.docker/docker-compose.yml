@@ -61,7 +61,7 @@ services:
   db:
     hostname: db
     container_name: ${PROJECT_NAME}_db
-    image: mariadb:10.6.12
+    image: mariadb:10.6.16
     dns:
       - ${SUBNET_BASE}.20
       - 8.8.8.8
