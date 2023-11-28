@@ -1,0 +1,13 @@
+#!/usr/bin/env /bin/bash
+
+# @description: Run Qwik CLI in the node containerdc
+
+set -e
+
+TASK=$@
+
+docker exec -it ${PROJECT_NAME}_node /bin/bash -c "\
+umask g=rwx,u=rwx,o=rwx &&\
+cd /var/www &&\
+npx qwik $TASK"
+
