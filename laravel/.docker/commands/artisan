@@ -1,0 +1,18 @@
+#!/usr/bin/env /bin/bash
+
+# @description: Run artisan in the php container
+
+set -e
+
+DEFAULT_TASK="serve --host 0.0.0.0"
+
+if [[ -z $@ ]]
+then
+    echo -e "empty task param, run default ${DEFAULT_TASK} task"
+    TASK=$DEFAULT_TASK
+else
+    TASK=$@
+fi
+
+docker exec -it ${PROJECT_NAME}_php /bin/bash -c "php artisan $TASK"
+

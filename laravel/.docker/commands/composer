@@ -1,0 +1,10 @@
+#!/usr/bin/env /bin/bash
+
+# @description: Run composer in the php container
+
+set -e
+
+TASK="$@"
+
+docker exec -it ${PROJECT_NAME}_php /bin/bash -c "composer $TASK"
+
