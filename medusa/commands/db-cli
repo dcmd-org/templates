@@ -1,0 +1,8 @@
+#!/usr/bin/env /bin/bash
+
+# @description: Connect to the mysql database
+
+set -e
+
+docker exec -it ${PROJECT_NAME}_db psql -d default -U root $@
+

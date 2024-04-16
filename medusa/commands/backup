@@ -1,0 +1,16 @@
+#!/usr/bin/env /bin/bash
+
+# @description: Create a backup of the database and files
+
+set -e
+
+docker exec -i ${PROJECT_NAME}_db pg_dump --clean -U root -d default > "${PROJECT_ROOT}/.docker/backup/db.sql"
+
+cd "${PROJECT_ROOT}/.docker/backup"
+
+rm -rf backup.tar.gz
+tar -czvf backup.tar.gz .
+
+cd -
+
+echo -e "📦 Backup successfully created"

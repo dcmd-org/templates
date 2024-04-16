@@ -1,0 +1,12 @@
+#!/usr/bin/env /bin/bash
+
+# @description: Restore database and files from backup
+
+set -e
+
+echo -e "Importing database..."
+docker exec -i ${PROJECT_NAME}_db psql -U root -d default < "${PROJECT_ROOT}/.docker/backup/db.sql"
+
+echo -e "✅ Database restored"
+
+

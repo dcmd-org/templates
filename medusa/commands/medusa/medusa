@@ -1,0 +1,23 @@
+#!/usr/bin/env /bin/bash
+
+# @description: Run medusa CLI
+
+set -e
+
+DEFAULT_TASK="develop -p 9000 -H 0.0.0.0"
+
+if [[ -z $@ ]]
+then
+    echo -e "empty task param, run default ${DEFAULT_TASK} task"
+    TASK=$DEFAULT_TASK
+else
+    TASK=$@
+fi
+
+echo -e "running $TASK task"
+
+docker exec -it ${PROJECT_NAME}_node /bin/bash -c "\
+umask g=rwx,u=rwx,o=rwx &&\
+cd /var/www/medusa &&\
+npx medusa $TASK"
+
